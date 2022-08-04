@@ -1,0 +1,1102 @@
+{
+	"name": "M Monetisation",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "M_Monetisation_WebSDKInitalised",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 168543384816614
+		},
+		{
+			"eventType": "variable",
+			"name": "M_Monetisation_AdSuccess",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 115298096199596
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "M Monetisation",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Util function that lets other methods call a signal from JS blocks"
+				},
+				{
+					"functionName": "M_Monetisation_Signal",
+					"functionDescription": "",
+					"functionCategory": "Monetisation",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "signal",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 328246114925112
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 692868721791542,
+							"parameters": {
+								"tag": "signal"
+							}
+						}
+					],
+					"sid": 186896670010693
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "M Monetisation Getters",
+					"description": "Expression functions that return a value",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\n[h3]Whether an SDK is enabled.[/h3]\nReturns 0 if no SDK is initialised. Returns 1 otherwise"
+						},
+						{
+							"functionName": "M_Monetisation_GetEnabled",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "number",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [],
+							"sid": 432490418655110,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "enabled",
+									"type": "boolean",
+									"initialValue": "false",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 259950729504230
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "localVars.enabled = globalThis.WebSdkWrapper.enabled"
+										}
+									],
+									"sid": 228462395579184
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 621613273749946,
+											"parameters": {
+												"variable": "enabled"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 962558329992517,
+											"parameters": {
+												"value": "1"
+											}
+										}
+									],
+									"sid": 393032675380178
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 802633385271301
+										}
+									],
+									"actions": [
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 249265951072688,
+											"parameters": {
+												"value": "0"
+											}
+										}
+									],
+									"sid": 655736157607249
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\n[h3]Whether the user has an adblocker[/h3]\nOnly supported on:\n- Poki\n- CrazyGames\n\nReturns 1 if the SDK detected an adblocker is in use. Returns 0 otherwise."
+						},
+						{
+							"functionName": "M_Monetisation_GetHasAdblock",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "number",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [],
+							"sid": 539427579979738,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "hasAdblocks",
+									"type": "boolean",
+									"initialValue": "false",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 636336952281123
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "localVars.hasAdblocks = globalThis.WebSdkWrapper.hasAdblock()"
+										}
+									],
+									"sid": 536821325384386
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 593281559611636,
+											"parameters": {
+												"variable": "hasAdblocks"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 151147547052154,
+											"parameters": {
+												"value": "1"
+											}
+										}
+									],
+									"sid": 788164730096784
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 756617578552948
+										}
+									],
+									"actions": [
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 646451741579482,
+											"parameters": {
+												"value": "0"
+											}
+										}
+									],
+									"sid": 627100384022183
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\n[h3]Whether the current SDK supports ads.[/h3]\nReturns 0 if no SDK is initialised, or if the SDK is CoolMathGames. Returns 1 otherwise."
+						},
+						{
+							"functionName": "M_Monetisation_GetHasAds",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "number",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [],
+							"sid": 531869480821047,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "hasAds",
+									"type": "boolean",
+									"initialValue": "false",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 972817956467075
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "localVars.hasAds = globalThis.WebSdkWrapper.hasAdblock()"
+										}
+									],
+									"sid": 872117713566661
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 893899748344864,
+											"parameters": {
+												"variable": "hasAds"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 286617590020827,
+											"parameters": {
+												"value": "1"
+											}
+										}
+									],
+									"sid": 311919504154204
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 234298197813538
+										}
+									],
+									"actions": [
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 323069773304277,
+											"parameters": {
+												"value": "0"
+											}
+										}
+									],
+									"sid": 907987547381656
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Returns the current SDK name.[/h3]\nReturns one of:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize\n- CoolMathGames"
+						},
+						{
+							"functionName": "M_Monetisation_GetCurrentSdk",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "number",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "runtime.setReturnValue(globalThis.WebSdkWrapper.currentSdk.name);"
+								}
+							],
+							"sid": 588367474484272
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						}
+					],
+					"sid": 171926175460505
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "M Monetisation Actions",
+					"description": "The main actions you'll want to implement",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "[h3]Starts a rewarded.[/h3]\n\nCalls the signal when the ad is complete\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_Rewarded",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "signal",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"sid": 233393390787376
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+								}
+							],
+							"sid": 817105287385898
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Starts an interstitial.[/h3]\n\nCalls the signal when the ad is complete\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_Interstitial",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "signal",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"sid": 390993591111623
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+								}
+							],
+							"sid": 841438447641158
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Initialises the SDK[/h3]\nConfigure in sdk-config.json\n\nCalls the signal when initialisation is complete"
+						},
+						{
+							"functionName": "M_Monetisation_Init",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "forceDebug",
+									"type": "boolean",
+									"initialValue": "false",
+									"comment": "",
+									"sid": 287869091126665
+								},
+								{
+									"name": "signal",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"sid": 900390129130068
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 705601177861882,
+									"parameters": {
+										"variable": "M_Monetisation_WebSDKInitalised"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 752611015870136,
+									"parameters": {
+										"variable": "M_Monetisation_WebSDKInitalised",
+										"value": "true"
+									}
+								},
+								{
+									"id": "request-project-file",
+									"objectClass": "AJAX",
+									"sid": 797386205436724,
+									"parameters": {
+										"tag": "\"\"",
+										"file": "sdk-config.json"
+									}
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 146658606758524
+								}
+							],
+							"sid": 795805535287352,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "config",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 154367985697977
+								},
+								{
+									"eventType": "variable",
+									"name": "name",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 765821325835796
+								},
+								{
+									"eventType": "variable",
+									"name": "data",
+									"type": "string",
+									"initialValue": "{}",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 323569730877010
+								},
+								{
+									"eventType": "variable",
+									"name": "debugData",
+									"type": "string",
+									"initialValue": "{}",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 498786918223935
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 618953581805366,
+											"parameters": {
+												"variable": "config",
+												"value": "AJAX.LastData"
+											}
+										},
+										{
+											"type": "script",
+											"script": "const config = JSON.parse(localVars.config);\nlocalVars.name = config['platform']\n\nif (config['extraData'][localVars.name]) {\n\tconst data = config['extraData'][localVars.name]['data'];\n\tlet debugData = config['extraData'][localVars.name]['debugData'];\n\n\tif (debugData === undefined) debugData = data\n\n\tlocalVars.data = JSON.stringify(data);\n\tlocalVars.debugData = JSON.stringify(debugData);\n}"
+										}
+									],
+									"sid": 664559462556181
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-in-preview",
+											"objectClass": "System",
+											"sid": 969776267323063
+										},
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 562893631656565,
+											"parameters": {
+												"variable": "forceDebug"
+											}
+										}
+									],
+									"actions": [
+										{
+											"type": "script",
+											"script": "globalThis.WebSdkWrapper.init(localVars.name, true, JSON.parse(localVars.debugData)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+										}
+									],
+									"sid": 580297653473574,
+									"isOrBlock": true
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 214576780073391
+										}
+									],
+									"actions": [
+										{
+											"type": "script",
+											"script": "globalThis.WebSdkWrapper.init(localVars.name, false, JSON.parse(localVars.data)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+										}
+									],
+									"sid": 588743157716465
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Banner[/h3]\ndata needs to be a valid JSON string\n\nSupported on:\n- CrazyGames"
+						},
+						{
+							"functionName": "M_Monetisation_Banner",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "data",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"sid": 481064059310220
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.banner(JSON.parse(localVars.data))"
+								}
+							],
+							"sid": 712943959228571
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						}
+					],
+					"sid": 271160839594400
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "M Monetisation Analytics",
+					"description": "Required analytics methods",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "[h3]Happy Time[/h3]\n\nscale is an optional (deprecated?) value from 0 to 1 used on Poki. Unused on other platforms.\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix"
+						},
+						{
+							"functionName": "M_Monetisation_HappyTime",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "scale",
+									"type": "number",
+									"initialValue": "1",
+									"comment": "",
+									"sid": 241884900299149
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.happyTime(localVars.scale)"
+								}
+							],
+							"sid": 482272493526191
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Gameplay Start[/h3]\n[b][u]Required[/u][/b] on:\n- Poki\n- CrazyGames\n- GamePix"
+						},
+						{
+							"functionName": "M_Monetisation_GameplayStart",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.gameplayStart()"
+								}
+							],
+							"sid": 264462823978305
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Gameplay Stop[/h3]\n[b][u]Required[/u][/b] on:\n- Poki\n- CrazyGames\n- GamePix"
+						},
+						{
+							"functionName": "M_Monetisation_GameplayStop",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.gameplayStop()"
+								}
+							],
+							"sid": 746453694002031
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Loading Start[/h3]\n[b][u]Required[/u][/b] on:\n- Poki\n\n[b]PS:[/b] This is actually getting deprecated on Poki. You can still use it for safety, but eventually it'll just stop doing anything (it will not produce errors)"
+						},
+						{
+							"functionName": "M_Monetisation_LoadingStart",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.loadingStart()"
+								}
+							],
+							"sid": 352536654123482
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Loading End[/h3]\n[b][u]Required[/u][/b] on:\n- Poki\n- GamePix"
+						},
+						{
+							"functionName": "M_Monetisation_LoadingEnd",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.loadingEnd()"
+								}
+							],
+							"sid": 847086520532408
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Loading Progress[/h3]\n\nprogress is a value from 0 to 100\n\n[b][u]Required[/u][/b] on:\n- GamePix"
+						},
+						{
+							"functionName": "M_Monetisation_LoadingProgress",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "progress",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"sid": 501307952990447
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.loadingProgress(localVars.progress)"
+								}
+							],
+							"sid": 442485443894765
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Level Start[/h3]\n\nlevel is the level number\n\n[b][u]Required[/u][/b] on:\n- GamePix\n- CoolMathGames"
+						},
+						{
+							"functionName": "M_Monetisation_LevelStart",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "level",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"sid": 158668169409704
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.levelStart(localVars.level)"
+								}
+							],
+							"sid": 172821128785743
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Replay Level[/h3]\n\nlevel is the level number\n\n[b][u]Required[/u][/b] on:\n- CoolMathGames"
+						},
+						{
+							"functionName": "M_Monetisation_ReplayLevel",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "level",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"sid": 330503070287756
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.replayLevel(localVars.level)"
+								}
+							],
+							"sid": 165700916625064
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Score[/h3]\n\nscore is a number representing the current score. AFAIK this overwrites the last score sent? I have no idea what this is for to be honest\n\n[b][u]Required[/u][/b] on:\n- GamePix"
+						},
+						{
+							"functionName": "M_Monetisation_Score",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "score",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"sid": 943828963608167
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "globalThis.WebSdkWrapper.score(localVars.score)"
+								}
+							],
+							"sid": 411207880718280
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						}
+					],
+					"sid": 984599525812090
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "M Monetisation Events",
+					"description": "Events triggered by the SDK that sometimes need special attention\n\nYou might need to fill these functions with more stuff depending on your game",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "[h3]Ad Started[/h3]\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_OnAdStarted",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "M_Monetisation_OnPause",
+									"sid": 145174973583560
+								}
+							],
+							"sid": 283658112448967
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]Ad End[/h3]\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_OnAdEnd",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "M_Monetisation_OnResume",
+									"sid": 949364080239519
+								}
+							],
+							"sid": 110974858574068
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]On Unmute[/h3]\nCalled on ad end\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_OnUnmute",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "M_Audio_Set_Muted",
+									"sid": 807240005512928,
+									"parameters": [
+										false,
+										true
+									]
+								}
+							],
+							"sid": 349504336097818
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]On Mute[/h3]\nCalled on ad start\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_OnMute",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "M_Audio_Set_Muted",
+									"sid": 816989287979519,
+									"parameters": [
+										true,
+										true
+									]
+								}
+							],
+							"sid": 724667615138131
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]On Resume[/h3]\nCalled on ad end\nGamepix also sometimes calls this when it wants the game to resume (?)\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_OnResume",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-time-scale",
+									"objectClass": "System",
+									"sid": 844496023129840,
+									"parameters": {
+										"time-scale": "1"
+									}
+								}
+							],
+							"sid": 938446186983275
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]On Pause[/h3]\nCalled on ad start\nGamepix also sometimes calls this when it wants the game to pause (?)\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n- GameDistribution\n- GameMonetize"
+						},
+						{
+							"functionName": "M_Monetisation_OnPause",
+							"functionDescription": "",
+							"functionCategory": "Monetisation",
+							"functionReturnType": "none",
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-time-scale",
+									"objectClass": "System",
+									"sid": 905446688552298,
+									"parameters": {
+										"time-scale": "0"
+									}
+								}
+							],
+							"sid": 617826124888421
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						}
+					],
+					"sid": 257105242749594
+				}
+			],
+			"sid": 598657836904928
+		}
+	],
+	"sid": 439761026501870
+}

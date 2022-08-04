@@ -1,0 +1,372 @@
+{
+	"name": "M Audio",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "M Audio",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "M_Audio_Toggle",
+					"functionDescription": "",
+					"functionCategory": "Audio",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "toggle-boolean-instvar",
+							"objectClass": "Settings",
+							"sid": 398809839573493,
+							"parameters": {
+								"instance-variable": "AudioMuted"
+							}
+						}
+					],
+					"sid": 965838338151559,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Settings",
+									"sid": 393590127153966,
+									"parameters": {
+										"instance-variable": "AudioMuted"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-silent",
+									"objectClass": "Audio",
+									"sid": 457698464283757,
+									"parameters": {
+										"mode": "silent"
+									}
+								}
+							],
+							"sid": 595201870645206
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 418732126784865
+								}
+							],
+							"actions": [
+								{
+									"id": "set-silent",
+									"objectClass": "Audio",
+									"sid": 549029292040546,
+									"parameters": {
+										"mode": "not-silent"
+									}
+								}
+							],
+							"sid": 594725149374068
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "M_Audio_Update_UI",
+									"sid": 980486524231303
+								},
+								{
+									"callFunction": "M_Save_SaveData",
+									"sid": 367992555866707
+								}
+							],
+							"sid": 758548336321474
+						}
+					]
+				},
+				{
+					"functionName": "M_Audio_Init",
+					"functionDescription": "",
+					"functionCategory": "Audio",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 320108109294535,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Settings",
+									"sid": 490188324356657,
+									"parameters": {
+										"instance-variable": "AudioMuted"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "M_Audio_Set_Muted",
+									"sid": 650852973106863,
+									"parameters": [
+										false,
+										false
+									]
+								}
+							],
+							"sid": 901748149665999
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 821174169045566
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "M_Audio_Set_Muted",
+									"sid": 372301125228154,
+									"parameters": [
+										true,
+										false
+									]
+								}
+							],
+							"sid": 854360793648502
+						}
+					]
+				},
+				{
+					"functionName": "M_Audio_Set_Muted",
+					"functionDescription": "",
+					"functionCategory": "Audio",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "value",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"sid": 622604514446631
+						},
+						{
+							"name": "sdkCall",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"sid": 321667816102238
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 466602332925598,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 944405352483178,
+									"parameters": {
+										"variable": "value"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-silent",
+									"objectClass": "Audio",
+									"sid": 958013906665765,
+									"parameters": {
+										"mode": "silent"
+									}
+								}
+							],
+							"sid": 238297153861192,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 351248682115957,
+											"parameters": {
+												"variable": "sdkCall"
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "Settings",
+											"sid": 632551617098753,
+											"parameters": {
+												"instance-variable": "AudioMuted",
+												"value": "true"
+											}
+										}
+									],
+									"sid": 315894680143704
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 487370874897807
+								}
+							],
+							"actions": [],
+							"sid": 638203440198445,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 704671927624792,
+											"parameters": {
+												"variable": "sdkCall"
+											},
+											"isInverted": true
+										},
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "Settings",
+											"sid": 498279347105476,
+											"parameters": {
+												"instance-variable": "AudioMuted"
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-silent",
+											"objectClass": "Audio",
+											"sid": 612030073945940,
+											"parameters": {
+												"mode": "not-silent"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "Settings",
+											"sid": 390113061489944,
+											"parameters": {
+												"instance-variable": "AudioMuted",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 447626862843189,
+									"isOrBlock": true
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "M_Audio_Update_UI",
+									"sid": 429736910276724
+								},
+								{
+									"callFunction": "M_Save_SaveData",
+									"sid": 191908155205666
+								}
+							],
+							"sid": 380416653154215
+						}
+					]
+				},
+				{
+					"functionName": "M_Audio_Update_UI",
+					"functionDescription": "",
+					"functionCategory": "Audio",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 138421533254400,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Change the UI to reflect the changes if needed"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [],
+							"sid": 446995608644275
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "An expression to get a volume value with a slight random variation"
+				},
+				{
+					"functionName": "M_Audio_CalcSound",
+					"functionDescription": "An expression to get a volume value with a slight random variation",
+					"functionCategory": "Audio",
+					"functionReturnType": "number",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "base",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 994203813540965
+						},
+						{
+							"name": "rand",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 179630791607328
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let rand = Math.random() * localVars.rand * 2 + (1- localVars.rand)\nlet boost = runtime.globalVars.G_Audio_Boost;\n\nruntime.setReturnValue((20/Math.log(10)) * Math.log((Math.pow(10, localVars.base/20) + boost) * rand));"
+						}
+					],
+					"sid": 702795963504118
+				}
+			],
+			"sid": 535103183754434
+		}
+	],
+	"sid": 345290197875173
+}

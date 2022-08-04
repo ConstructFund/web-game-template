@@ -1,0 +1,14 @@
+{
+	"name": "Settings",
+	"plugin-id": "Globals",
+	"sid": 590368075277698,
+	"isGlobal": true,
+	"instanceVariables": [
+		{
+			"name": "AudioMuted",
+			"type": "boolean",
+			"desc": "",
+			"sid": 677075940234698
+		}
+	]
+}

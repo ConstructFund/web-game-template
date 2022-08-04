@@ -1,0 +1,10 @@
+{
+	"name": "ExecuteJsOnDom",
+	"plugin-id": "skymen_ExecuteJsOnDom",
+	"sid": 935030091588303,
+	"singleglobal-inst": {
+		"type": "ExecuteJsOnDom",
+		"properties": {},
+		"uid": 9
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"name": "SaveDataGlobals",
+	"plugin-id": "Globals",
+	"sid": 143018849569822,
+	"instanceVariables": [],
+	"members": [
+		"GameData",
+		"Settings"
+	]
+}

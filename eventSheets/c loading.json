@@ -1,0 +1,263 @@
+{
+	"name": "C Loading",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "INDEX"
+		},
+		{
+			"eventType": "variable",
+			"name": "C_Loading_Progress",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 390926284630333
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "C Loading",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "C_Loading_WaveSpeed",
+					"type": "number",
+					"initialValue": "300",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": true,
+					"sid": 844874005555121
+				},
+				{
+					"eventType": "variable",
+					"name": "C_Loading_IsInit",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 602671067633586
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 480636305052387
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "M_Monetisation_Init",
+							"sid": 648293455296158,
+							"parameters": [
+								false,
+								"\"sdk_init\""
+							]
+						},
+						{
+							"id": "wait-for-signal",
+							"objectClass": "System",
+							"sid": 444384209704335,
+							"parameters": {
+								"tag": "\"sdk_init\""
+							}
+						},
+						{
+							"callFunction": "M_Monetisation_LoadingStart",
+							"sid": 988914536378456
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 239754393592660,
+							"parameters": {
+								"variable": "C_Loading_IsInit",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 742267400578842
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 793187865240320,
+							"parameters": {
+								"variable": "C_Loading_IsInit"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 592232865331699,
+							"parameters": {
+								"variable": "C_Loading_Progress",
+								"value": "lerp(C_Loading_Progress, loadingprogress, 1 - (exp(120 * ln(1 - 0.1)))^dt)"
+							}
+						}
+					],
+					"sid": 162552480606446
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 339998724855098,
+							"parameters": {
+								"first-value": "loadingprogress",
+								"comparison": 2,
+								"second-value": "1"
+							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 965613486045548,
+							"parameters": {
+								"variable": "C_Loading_IsInit"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "M_Monetisation_LoadingProgress",
+							"sid": 313524754294793,
+							"parameters": [
+								"(C_Loading_Progress) * 100"
+							]
+						}
+					],
+					"sid": 681924747075765
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 782544319694628,
+							"parameters": {
+								"first-value": "C_Loading_Progress",
+								"comparison": 5,
+								"second-value": "0.99"
+							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 680449857431123,
+							"parameters": {
+								"variable": "C_Loading_IsInit"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 707933578439343
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 517989527242563,
+							"parameters": {
+								"seconds": "0.1"
+							}
+						},
+						{
+							"callFunction": "M_Monetisation_LoadingEnd",
+							"sid": 280296360168942
+						}
+					],
+					"sid": 156210150920727,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "M_Save_MaybeLoadData",
+									"sid": 358110510870218
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 680108652048777
+								},
+								{
+									"callFunction": "M_Monetisation_Interstitial",
+									"sid": 709212755804595,
+									"parameters": [
+										"\"loading complete\""
+									]
+								},
+								{
+									"id": "wait-for-signal",
+									"objectClass": "System",
+									"sid": 530161670435109,
+									"parameters": {
+										"tag": "\"loading complete\""
+									}
+								},
+								{
+									"id": "go-to-layout",
+									"objectClass": "System",
+									"sid": 661442789519312,
+									"parameters": {
+										"layout": "Main"
+									}
+								}
+							],
+							"sid": 775680767657694
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 587333949580844
+						}
+					],
+					"actions": [
+						{
+							"id": "set-progress",
+							"objectClass": "LoadingProgressBar",
+							"sid": 289564018178268,
+							"parameters": {
+								"value": "C_Loading_Progress * 100"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "LoadingText",
+							"sid": 847489262254796,
+							"parameters": {
+								"text": "\"Loading \" & round(C_Loading_Progress * 100) & \"%\""
+							}
+						}
+					],
+					"sid": 601323686199813
+				}
+			],
+			"sid": 837458666424146
+		}
+	],
+	"sid": 899171905598925
+}

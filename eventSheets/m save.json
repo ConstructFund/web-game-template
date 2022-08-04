@@ -1,0 +1,412 @@
+{
+	"name": "M Save",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "M Save",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "M_Save_Version",
+					"type": "string",
+					"initialValue": "0.0.1",
+					"comment": "Change this when making significant restructuring of the save data. This should only be changed if you notice older saves break",
+					"isStatic": false,
+					"isConstant": true,
+					"sid": 796271822522748
+				},
+				{
+					"functionName": "M_Save_SaveData",
+					"functionDescription": "",
+					"functionCategory": "Save",
+					"functionReturnType": "none",
+					"functionIsAsync": true,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 408395628897608,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "data",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 716516366422740
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "const saveData = {}\nconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\n\nsaveDataGlobals.forEach(saveDataGlobal => {\n\tconst uid = saveDataGlobal.uid;\n\tconst sdkInst = c3_runtimeInterface._localRuntime.GetInstanceByUID(uid);\n\tconst save = sdkInst.SaveToJson();\n\tsaveData[sdkInst._objectType._name] = save;\n})\n\nlocalVars.data = JSON.stringify({version: localVars.M_Save_Version, globals: saveData}, null, 2);"
+								},
+								{
+									"callFunction": "M_Save_ActuallyWriteData",
+									"sid": 516225893925903,
+									"parameters": [
+										"data"
+									]
+								}
+							],
+							"sid": 716222174446720
+						}
+					]
+				},
+				{
+					"functionName": "M_Save_ActuallyWriteData",
+					"functionDescription": "",
+					"functionCategory": "Save",
+					"functionReturnType": "none",
+					"functionIsAsync": true,
+					"functionParameters": [
+						{
+							"name": "data",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 518287747000740
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 254876194272316,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "useOwnSave",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 935380475316654
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "localVars.useOwnSave = WebSdkWrapper.hasOwnSave()"
+								}
+							],
+							"sid": 654587722198587
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 341331254673115,
+									"parameters": {
+										"variable": "useOwnSave"
+									}
+								}
+							],
+							"actions": [
+								{
+									"type": "script",
+									"script": "WebSdkWrapper.currentSdk.implementation.save.set(\"save\", localVars.data);"
+								}
+							],
+							"sid": 511327630606475
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 216995045701763
+								}
+							],
+							"actions": [
+								{
+									"id": "set-from-text",
+									"objectClass": "SaveBinaryData",
+									"sid": 871932413214921,
+									"parameters": {
+										"value": "data"
+									}
+								},
+								{
+									"id": "set-binary-item",
+									"objectClass": "LocalStorage",
+									"sid": 131580457587610,
+									"parameters": {
+										"key": "\"save\"",
+										"source": "SaveBinaryData"
+									}
+								}
+							],
+							"sid": 282865036988407
+						}
+					]
+				},
+				{
+					"functionName": "M_Save_ActuallyLoadData",
+					"functionDescription": "",
+					"functionCategory": "Save",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "data",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 746096223912174
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 859983499378821,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "try {\n\tlet saveData = JSON.parse(localVars.data);\n\tconst version = saveData.version;\n\tif (version !== localVars.M_Save_Version) {\n\t\tsaveData = globalThis.handleVersionTransition(saveData);\n\t}\n\tconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\n\t\n\tsaveDataGlobals.forEach(saveDataGlobal => {\n\t\tconst uid = saveDataGlobal.uid;\n\t\tconst sdkInst = c3_runtimeInterface._localRuntime.GetInstanceByUID(uid);\n\t\tif (saveData.globals[sdkInst._objectType._name]) sdkInst.LoadFromJson(saveData[sdkInst._objectType._name]);\n\t})\n} catch(e) {\n\tconsole.error(\"invalid save data\", localVars.data);\n}"
+								},
+								{
+									"id": "signal",
+									"objectClass": "System",
+									"sid": 511238452865816,
+									"parameters": {
+										"tag": "\"M_Save_MaybeLoadFinished\""
+									}
+								},
+								{
+									"callFunction": "M_Audio_Init",
+									"sid": 501021168916258
+								}
+							],
+							"sid": 514139363499235
+						}
+					]
+				},
+				{
+					"functionName": "M_Save_RemoveSave",
+					"functionDescription": "",
+					"functionCategory": "Save",
+					"functionReturnType": "none",
+					"functionIsAsync": true,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "remove-item",
+							"objectClass": "LocalStorage",
+							"sid": 731058534434774,
+							"parameters": {
+								"key": "\"save\""
+							}
+						}
+					],
+					"sid": 431557580373253
+				},
+				{
+					"functionName": "M_Save_MaybeLoadData",
+					"functionDescription": "",
+					"functionCategory": "Save",
+					"functionReturnType": "none",
+					"functionIsAsync": true,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 498128587429711,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "useOwnSave",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 748047526815983
+						},
+						{
+							"eventType": "comment",
+							"text": "this is a WIP feature to add support for Facebook, Snapchat and Gamepix save systems. Unusued currently"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "//localVars.useOwnSave = globalThis.WebSdkWrapper.hasOwnSave()"
+								}
+							],
+							"sid": 680360792767921
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 737606551411165,
+									"parameters": {
+										"variable": "useOwnSave"
+									}
+								}
+							],
+							"actions": [
+								{
+									"type": "script",
+									"script": "let data = await WebSdkWrapper.currentSdk.implementation.save.get(\"save\");\nruntime.callFunction(\"M_Save_ActuallyLoadData\", data);"
+								}
+							],
+							"sid": 916286698748992
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 683676996411079
+								}
+							],
+							"actions": [
+								{
+									"id": "check-item-exists",
+									"objectClass": "LocalStorage",
+									"sid": 646378155684577,
+									"parameters": {
+										"key": "\"save\""
+									}
+								},
+								{
+									"id": "wait-for-signal",
+									"objectClass": "System",
+									"sid": 649186437208453,
+									"parameters": {
+										"tag": "\"M_Save_MaybeLoadFinished\""
+									}
+								}
+							],
+							"sid": 126012968017656
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-item-missing",
+							"objectClass": "LocalStorage",
+							"sid": 960767291082333,
+							"parameters": {
+								"key": "\"save\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 790009700516003,
+							"parameters": {
+								"seconds": "0"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 570671316910016,
+							"parameters": {
+								"tag": "\"M_Save_MaybeLoadFinished\""
+							}
+						}
+					],
+					"sid": 979018867483289
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-item-exists",
+							"objectClass": "LocalStorage",
+							"sid": 152255018516103,
+							"parameters": {
+								"key": "\"save\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "get-binary-item",
+							"objectClass": "LocalStorage",
+							"sid": 745893188012774,
+							"parameters": {
+								"key": "\"save\"",
+								"destination": "SaveBinaryData"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 413431446206818
+						}
+					],
+					"sid": 337705039900064,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "data",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 149373815879981
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 997351121987026,
+									"parameters": {
+										"variable": "data",
+										"value": "SaveBinaryData.GetText(0, SaveBinaryData.ByteLength)"
+									}
+								},
+								{
+									"callFunction": "M_Save_ActuallyLoadData",
+									"sid": 782167117230327,
+									"parameters": [
+										"data"
+									]
+								}
+							],
+							"sid": 133765441734256
+						}
+					]
+				}
+			],
+			"sid": 770592265275951
+		}
+	],
+	"sid": 222414790063705
+}

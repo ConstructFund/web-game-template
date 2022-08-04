@@ -1,0 +1,20 @@
+{
+	"name": "GameData",
+	"plugin-id": "Globals",
+	"sid": 925953407716830,
+	"isGlobal": true,
+	"instanceVariables": [
+		{
+			"name": "highScore",
+			"type": "number",
+			"desc": "",
+			"sid": 404688834750768
+		},
+		{
+			"name": "score",
+			"type": "number",
+			"desc": "",
+			"sid": 312412460161002
+		}
+	]
+}

@@ -37,6 +37,7 @@
 					"functionDescription": "",
 					"functionCategory": "Monetisation",
 					"functionReturnType": "none",
+					"functionCopyPicked": false,
 					"functionIsAsync": false,
 					"functionParameters": [
 						{
@@ -77,6 +78,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "number",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -165,6 +167,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "number",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -253,6 +256,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "number",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -341,6 +345,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "number",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -376,6 +381,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -388,13 +394,40 @@
 							],
 							"eventType": "function-block",
 							"conditions": [],
-							"actions": [
+							"actions": [],
+							"sid": 817105287385898,
+							"children": [
 								{
-									"type": "script",
-									"script": "globalThis.WebSdkWrapper.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "wait-for-signal",
+											"objectClass": "System",
+											"sid": 115391136177474,
+											"parameters": {
+												"tag": "signal"
+											}
+										},
+										{
+											"callFunction": "M_Monetisation_OnAdEnd",
+											"sid": 726705600552659
+										}
+									],
+									"sid": 415229222622574
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "globalThis.WebSdkWrapper.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+										}
+									],
+									"sid": 391184748098123
 								}
-							],
-							"sid": 817105287385898
+							]
 						},
 						{
 							"eventType": "comment",
@@ -409,6 +442,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -421,13 +455,40 @@
 							],
 							"eventType": "function-block",
 							"conditions": [],
-							"actions": [
+							"actions": [],
+							"sid": 841438447641158,
+							"children": [
 								{
-									"type": "script",
-									"script": "globalThis.WebSdkWrapper.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "wait-for-signal",
+											"objectClass": "System",
+											"sid": 401259252922238,
+											"parameters": {
+												"tag": "signal"
+											}
+										},
+										{
+											"callFunction": "M_Monetisation_OnAdEnd",
+											"sid": 367141102845251
+										}
+									],
+									"sid": 651835842936623
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "globalThis.WebSdkWrapper.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+										}
+									],
+									"sid": 765262145252875
 								}
-							],
-							"sid": 841438447641158
+							]
 						},
 						{
 							"eventType": "comment",
@@ -442,6 +503,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -616,6 +678,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -659,6 +722,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -692,6 +756,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -717,6 +782,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -742,6 +808,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -767,6 +834,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -792,6 +860,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -825,6 +894,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -858,6 +928,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -891,6 +962,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [
 								{
@@ -934,6 +1006,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -959,6 +1032,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -984,6 +1058,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -1013,6 +1088,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -1042,6 +1118,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",
@@ -1071,6 +1148,7 @@
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
 							"functionReturnType": "none",
+							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
 							"eventType": "function-block",

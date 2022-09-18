@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 30200,
+	"savedWithRelease": 30802,
 	"name": "New project",
 	"runtime": "c3",
 	"useWorker": "worker",
@@ -19,7 +19,7 @@
 			"id": "LocalStorage",
 			"name": "Local storage",
 			"author": "Scirra",
-			"version": "r302",
+			"version": "r308.2",
 			"bundled": false
 		},
 		{
@@ -27,7 +27,7 @@
 			"id": "BinaryData",
 			"name": "Binary Data",
 			"author": "Scirra",
-			"version": "r302",
+			"version": "r308.2",
 			"bundled": false
 		},
 		{
@@ -35,7 +35,7 @@
 			"id": "Audio",
 			"name": "Audio",
 			"author": "Scirra",
-			"version": "r302",
+			"version": "r308.2",
 			"bundled": false
 		},
 		{
@@ -51,7 +51,7 @@
 			"id": "AJAX",
 			"name": "AJAX",
 			"author": "Scirra",
-			"version": "r302",
+			"version": "r308.2",
 			"bundled": false
 		},
 		{
@@ -59,7 +59,7 @@
 			"id": "progressbar",
 			"name": "Progress bar",
 			"author": "Scirra",
-			"version": "r302",
+			"version": "r308.2",
 			"bundled": false
 		},
 		{
@@ -67,7 +67,7 @@
 			"id": "Text",
 			"name": "Text",
 			"author": "Scirra",
-			"version": "r302",
+			"version": "r308.2",
 			"bundled": false
 		}
 	],
@@ -328,7 +328,8 @@
 		"loaderStyle": "progress-logo",
 		"preloadSounds": true,
 		"cordovaiOSScheme": "app",
-		"cordovaAndroidScheme": "https"
+		"cordovaAndroidScheme": "https",
+		"autoReloadScriptsOnPreview": false
 	},
 	"viewportWidth": 854,
 	"viewportHeight": 480,

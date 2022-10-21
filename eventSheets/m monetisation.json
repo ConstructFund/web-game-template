@@ -280,7 +280,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "localVars.hasAds = globalThis.WebSdkWrapper.hasAdblock()"
+											"script": "localVars.hasAds = globalThis.WebSdkWrapper.hasAds()"
 										}
 									],
 									"sid": 872117713566661
@@ -715,7 +715,7 @@
 					"children": [
 						{
 							"eventType": "comment",
-							"text": "[h3]Happy Time[/h3]\n\nscale is an optional (deprecated?) value from 0 to 1 used on Poki. Unused on other platforms.\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix"
+							"text": "[h3]Happy Time[/h3]\n\nscale is an optional (deprecated?) value from 0 to 1 used on Poki. Unused on other platforms.\n\nSupported on:\n- Poki\n- CrazyGames\n- GamePix\n\n[b]PS:[/b] This might already be deprecated on Poki. You can still use it for safety or for other platforms, but it might just not do anything on Poki (it will not produce errors)"
 						},
 						{
 							"functionName": "M_Monetisation_HappyTime",
@@ -1164,6 +1164,27 @@
 								}
 							],
 							"sid": 617826124888421
+						},
+						{
+							"eventType": "comment",
+							"text": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n"
+						},
+						{
+							"eventType": "comment",
+							"text": "[h3]On Unlock All Levels[/h3]\nOnly required for CoolMathGames's premium account system\n\nSupported on:\n- CoolMathGames"
+						},
+						{
+							"functionName": "M_Monetisation_OnUnlockAllLevels",
+							"functionDescription": "",
+							"functionCategory": "",
+							"functionReturnType": "none",
+							"functionCopyPicked": false,
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [],
+							"sid": 751679518177486
 						},
 						{
 							"eventType": "comment",

@@ -422,7 +422,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "globalThis.WebSdkWrapper.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
 										}
 									],
 									"sid": 391184748098123
@@ -483,7 +483,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "globalThis.WebSdkWrapper.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
 										}
 									],
 									"sid": 765262145252875
@@ -640,7 +640,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "globalThis.WebSdkWrapper.init(localVars.name, true, JSON.parse(localVars.debugData)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.init(localVars.name, true, JSON.parse(localVars.debugData)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
 										}
 									],
 									"sid": 580297653473574,
@@ -658,7 +658,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "globalThis.WebSdkWrapper.init(localVars.name, false, JSON.parse(localVars.data)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", localVars.signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.init(localVars.name, false, JSON.parse(localVars.data)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
 										}
 									],
 									"sid": 588743157716465

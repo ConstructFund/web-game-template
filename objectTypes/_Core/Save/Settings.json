@@ -8,6 +8,7 @@
 			"name": "AudioMuted",
 			"type": "boolean",
 			"desc": "",
+			"show": true,
 			"sid": 677075940234698
 		}
 	]

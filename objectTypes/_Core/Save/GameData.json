@@ -8,12 +8,14 @@
 			"name": "highScore",
 			"type": "number",
 			"desc": "",
+			"show": true,
 			"sid": 404688834750768
 		},
 		{
 			"name": "score",
 			"type": "number",
 			"desc": "",
+			"show": true,
 			"sid": 312412460161002
 		}
 	]

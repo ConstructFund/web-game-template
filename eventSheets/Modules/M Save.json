@@ -23,6 +23,7 @@
 					"functionDescription": "",
 					"functionCategory": "Save",
 					"functionReturnType": "none",
+					"functionCopyPicked": false,
 					"functionIsAsync": true,
 					"functionParameters": [],
 					"eventType": "function-block",
@@ -65,6 +66,7 @@
 					"functionDescription": "",
 					"functionCategory": "Save",
 					"functionReturnType": "none",
+					"functionCopyPicked": false,
 					"functionIsAsync": true,
 					"functionParameters": [
 						{
@@ -158,6 +160,7 @@
 					"functionDescription": "",
 					"functionCategory": "Save",
 					"functionReturnType": "none",
+					"functionCopyPicked": false,
 					"functionIsAsync": false,
 					"functionParameters": [
 						{
@@ -203,6 +206,7 @@
 					"functionDescription": "",
 					"functionCategory": "Save",
 					"functionReturnType": "none",
+					"functionCopyPicked": false,
 					"functionIsAsync": true,
 					"functionParameters": [],
 					"eventType": "function-block",
@@ -224,6 +228,7 @@
 					"functionDescription": "",
 					"functionCategory": "Save",
 					"functionReturnType": "none",
+					"functionCopyPicked": false,
 					"functionIsAsync": true,
 					"functionParameters": [],
 					"eventType": "function-block",

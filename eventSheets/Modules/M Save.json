@@ -47,7 +47,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "const saveData = {}\nconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\n\nsaveDataGlobals.forEach(saveDataGlobal => {\n\tconst uid = saveDataGlobal.uid;\n\tconst sdkInst = c3_runtimeInterface._localRuntime.GetInstanceByUID(uid);\n\tconst save = sdkInst.SaveToJson();\n\tsaveData[sdkInst._objectType._name] = save;\n})\n\nlocalVars.data = JSON.stringify({version: localVars.M_Save_Version, globals: saveData}, null, 2);"
+									"script": "const saveData = {}\nconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\nconst sdk_runtime = globalThis?.c3_runtimeInterface?._localRuntime ?? globalThis.skymenExexJSOnDom._runtime;\n\nsaveDataGlobals.forEach(saveDataGlobal => {\n\tconst uid = saveDataGlobal.uid;\n\tconst sdkInst = sdk_runtime.GetInstanceByUID(uid);\n\tconst save = sdkInst.SaveToJson();\n\tsaveData[sdkInst._objectType._name] = save;\n})\n\nlocalVars.data = JSON.stringify({version: localVars.M_Save_Version, globals: saveData}, null, 2);"
 								},
 								{
 									"callFunction": "M_Save_ActuallyWriteData",
@@ -182,7 +182,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "try {\n\tlet saveData = JSON.parse(localVars.data);\n\tconst version = saveData.version;\n\tif (version !== localVars.M_Save_Version) {\n\t\tsaveData = globalThis.handleVersionTransition(saveData);\n\t}\n\tconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\n\t\n\tsaveDataGlobals.forEach(saveDataGlobal => {\n\t\tconst uid = saveDataGlobal.uid;\n\t\tconst sdkInst = c3_runtimeInterface._localRuntime.GetInstanceByUID(uid);\n\t\tif (saveData.globals[sdkInst._objectType._name]) sdkInst.LoadFromJson(saveData[sdkInst._objectType._name]);\n\t})\n} catch(e) {\n\tconsole.error(\"invalid save data\", localVars.data);\n}"
+									"script": "try {\n\tlet saveData = JSON.parse(localVars.data);\n\tconst version = saveData.version;\n\tif (version !== localVars.M_Save_Version) {\n\t\tsaveData = globalThis.handleVersionTransition(saveData);\n\t}\n\tconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\n\tconst sdk_runtime = globalThis?.c3_runtimeInterface?._localRuntime ?? globalThis.skymenExexJSOnDom._runtime;\n\t\n\tsaveDataGlobals.forEach(saveDataGlobal => {\n\t\tconst uid = saveDataGlobal.uid;\n\t\tconst sdkInst = sdk_runtime.GetInstanceByUID(uid);\n\t\tif (saveData.globals[sdkInst._objectType._name]) sdkInst.LoadFromJson(saveData.globals[sdkInst._objectType._name]);\n\t})\n} catch(e) {\n\tconsole.error(\"invalid save data\", localVars.data);\n}"
 								},
 								{
 									"id": "signal",

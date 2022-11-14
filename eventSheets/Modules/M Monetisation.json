@@ -102,7 +102,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "localVars.enabled = globalThis.WebSdkWrapper.enabled"
+											"script": "localVars.enabled = globalThis.WebSdkWrapperBridge.enabled"
 										}
 									],
 									"sid": 228462395579184
@@ -191,7 +191,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "localVars.hasAdblocks = globalThis.WebSdkWrapper.hasAdblock()"
+											"script": "localVars.hasAdblocks = globalThis.WebSdkWrapperBridge.hasAdblock()"
 										}
 									],
 									"sid": 536821325384386
@@ -280,7 +280,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "localVars.hasAds = globalThis.WebSdkWrapper.hasAds()"
+											"script": "localVars.hasAds = globalThis.WebSdkWrapperBridge.hasAds()"
 										}
 									],
 									"sid": 872117713566661
@@ -353,7 +353,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "runtime.setReturnValue(globalThis.WebSdkWrapper.currentSdk.name);"
+									"script": "runtime.setReturnValue(globalThis.WebSdkWrapperBridge.currentSdk.name);"
 								}
 							],
 							"sid": 588367474484272
@@ -422,7 +422,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})\nglobalThis.WebSdkWrapperBridge.dispatch(\"adStarted\");"
 										}
 									],
 									"sid": 391184748098123
@@ -483,7 +483,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})\nglobalThis.WebSdkWrapperBridge.dispatch(\"adStarted\");"
 										}
 									],
 									"sid": 765262145252875
@@ -640,7 +640,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.init(localVars.name, true, JSON.parse(localVars.debugData)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.init(localVars.name, true, JSON.parse(localVars.debugData)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
 										}
 									],
 									"sid": 580297653473574,
@@ -658,7 +658,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapper.init(localVars.name, false, JSON.parse(localVars.data)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.init(localVars.name, false, JSON.parse(localVars.data)).then(() => {\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})"
 										}
 									],
 									"sid": 588743157716465
@@ -694,7 +694,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.banner(JSON.parse(localVars.data))"
+									"script": "globalThis.WebSdkWrapperBridge.banner(JSON.parse(localVars.data))"
 								}
 							],
 							"sid": 712943959228571
@@ -738,7 +738,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.happyTime(localVars.scale)"
+									"script": "globalThis.WebSdkWrapperBridge.happyTime(localVars.scale)"
 								}
 							],
 							"sid": 482272493526191
@@ -764,7 +764,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.gameplayStart()"
+									"script": "globalThis.WebSdkWrapperBridge.gameplayStart()"
 								}
 							],
 							"sid": 264462823978305
@@ -790,7 +790,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.gameplayStop()"
+									"script": "globalThis.WebSdkWrapperBridge.gameplayStop()"
 								}
 							],
 							"sid": 746453694002031
@@ -816,7 +816,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.loadingStart()"
+									"script": "globalThis.WebSdkWrapperBridge.loadingStart()"
 								}
 							],
 							"sid": 352536654123482
@@ -842,7 +842,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.loadingEnd()"
+									"script": "globalThis.WebSdkWrapperBridge.loadingEnd()"
 								}
 							],
 							"sid": 847086520532408
@@ -876,7 +876,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.loadingProgress(localVars.progress)"
+									"script": "globalThis.WebSdkWrapperBridge.loadingProgress(localVars.progress)"
 								}
 							],
 							"sid": 442485443894765
@@ -910,7 +910,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.levelStart(localVars.level)"
+									"script": "globalThis.WebSdkWrapperBridge.levelStart(localVars.level)"
 								}
 							],
 							"sid": 172821128785743
@@ -944,7 +944,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.replayLevel(localVars.level)"
+									"script": "globalThis.WebSdkWrapperBridge.replayLevel(localVars.level)"
 								}
 							],
 							"sid": 165700916625064
@@ -978,7 +978,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "globalThis.WebSdkWrapper.score(localVars.score)"
+									"script": "globalThis.WebSdkWrapperBridge.score(localVars.score)"
 								}
 							],
 							"sid": 411207880718280

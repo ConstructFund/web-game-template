@@ -1,6 +1,6 @@
 runOnStartup(async runtime => {
-	globalThis.skymenExexJSOnDom = runtime.objects.ExecuteJsOnDom.getFirstInstance().sdkInst;
-	const execJs = globalThis.skymenExexJSOnDom;
+	globalThis.skymenExexJSOnDomRuntimeSide = runtime.objects.ExecuteJsOnDom.getFirstInstance().sdkInst;
+	const execJs = globalThis.skymenExexJSOnDomRuntimeSide;
 	
 	execJs.CreateFunction("deepCopyObjWithoutFunctions", ["obj", "filter"], `
 		if (obj === null || typeof obj !== 'object') {
@@ -40,20 +40,20 @@ runOnStartup(async runtime => {
 	})
 	execJs._OnDispatch = (function (e) {
 		execJs.ignoreDispatch = true;
-		globalThis.WebSdkWrapper.dispatch(...e);
+		globalThis.WebSdkWrapperBridge.dispatch(...e);
 		execJs.ignoreDispatch = false;
 	})
 	execJs.AddDOMMessageHandler("dispatch", e=>execJs._OnDispatch(e))
 	
-	globalThis.WebSdkWrapper.onPause(() => {runtime.callFunction("M_Monetisation_OnPause")});
-	globalThis.WebSdkWrapper.onResume(() => {runtime.callFunction("M_Monetisation_OnResume")});
-	globalThis.WebSdkWrapper.onMute(() => {runtime.callFunction("M_Monetisation_OnMute")});
-	globalThis.WebSdkWrapper.onUnmute(() => {runtime.callFunction("M_Monetisation_OnUnmute")});
-	globalThis.WebSdkWrapper.onUnlockAllLevels(() => {runtime.callFunction("M_Monetisation_OnUnlockAllLevels")});
-	globalThis.WebSdkWrapper.onAdStarted(() => {runtime.callFunction("M_Monetisation_OnAdStarted")});
+	globalThis.WebSdkWrapperBridge.onPause(() => {runtime.callFunction("M_Monetisation_OnPause")});
+	globalThis.WebSdkWrapperBridge.onResume(() => {runtime.callFunction("M_Monetisation_OnResume")});
+	globalThis.WebSdkWrapperBridge.onMute(() => {runtime.callFunction("M_Monetisation_OnMute")});
+	globalThis.WebSdkWrapperBridge.onUnmute(() => {runtime.callFunction("M_Monetisation_OnUnmute")});
+	globalThis.WebSdkWrapperBridge.onUnlockAllLevels(() => {runtime.callFunction("M_Monetisation_OnUnlockAllLevels")});
+	globalThis.WebSdkWrapperBridge.onAdStarted(() => {runtime.callFunction("M_Monetisation_OnAdStarted")});
 })
 
-globalThis.WebSdkWrapper = (function () {
+globalThis.WebSdkWrapperBridge = (function () {
   /*
   ==============  EVENT DISPATCHER  =================
   vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
@@ -77,7 +77,7 @@ globalThis.WebSdkWrapper = (function () {
 	  fnObj.fn(...data);
 	});
 	events[event] = (events[event] || []).filter((fnObj) => !fnObj.once);
-	globalThis.skymenExexJSOnDom._DispatchToDom([event, ...data]);
+	globalThis.skymenExexJSOnDomRuntimeSide._DispatchToDom([event, ...data]);
   }
   /*
   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -106,7 +106,7 @@ globalThis.WebSdkWrapper = (function () {
 			resolve(e);
 		  }
 		});
-		globalThis.skymenExexJSOnDom.CallFunction("handleInit", [[name, debug, data]]);
+		globalThis.skymenExexJSOnDomRuntimeSide.CallFunction("handleInit", [[name, debug, data]]);
 	  }) 
 	},
 	onPause(fn) {
@@ -135,7 +135,7 @@ globalThis.WebSdkWrapper = (function () {
 	},
 	onUnlockAllLevels(fn) {
 	  listen("unlockAllLevels", fn);
-	  globalThis.skymenExexJSOnDom.Eval(`globalThis.WebSdkWrapper.onUnlockAllLevels(() => {
+	  globalThis.skymenExexJSOnDomRuntimeSide.Eval(`globalThis.WebSdkWrapper.onUnlockAllLevels(() => {
 		globalThis.WebSdkWrapper.dispatch("unlockAllLevels");
 	  })`);
 	},

@@ -344,7 +344,7 @@
 							"functionName": "M_Monetisation_GetCurrentSdk",
 							"functionDescription": "",
 							"functionCategory": "Monetisation",
-							"functionReturnType": "number",
+							"functionReturnType": "string",
 							"functionCopyPicked": false,
 							"functionIsAsync": false,
 							"functionParameters": [],
@@ -390,6 +390,13 @@
 									"initialValue": "",
 									"comment": "",
 									"sid": 233393390787376
+								},
+								{
+									"name": "handleGameplayStart",
+									"type": "boolean",
+									"initialValue": "true",
+									"comment": "",
+									"sid": 417782828044621
 								}
 							],
 							"eventType": "function-block",
@@ -422,7 +429,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.rewarded().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})\nglobalThis.WebSdkWrapperBridge.dispatch(\"adStarted\");"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.rewarded(localVars.handleGameplayStart).then(result => {\n\truntime.globalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})\nglobalThis.WebSdkWrapperBridge.dispatch(\"adStarted\");"
 										}
 									],
 									"sid": 391184748098123
@@ -451,6 +458,13 @@
 									"initialValue": "",
 									"comment": "",
 									"sid": 390993591111623
+								},
+								{
+									"name": "handleGameplayStart",
+									"type": "boolean",
+									"initialValue": "true",
+									"comment": "",
+									"sid": 375946030002767
 								}
 							],
 							"eventType": "function-block",
@@ -483,7 +497,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.interstitial().then(result => {\n\tlocalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})\nglobalThis.WebSdkWrapperBridge.dispatch(\"adStarted\");"
+											"script": "const signal = localVars.signal;\nglobalThis.WebSdkWrapperBridge.interstitial(localVars.handleGameplayStart).then(result => {\n\truntime.globalVars.M_Monetisation_AdSuccess = !!result;\n\truntime.callFunction(\"M_Monetisation_Signal\", signal)\n})\nglobalThis.WebSdkWrapperBridge.dispatch(\"adStarted\");"
 										}
 									],
 									"sid": 765262145252875

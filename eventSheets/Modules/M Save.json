@@ -47,7 +47,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "const saveData = {}\nconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\nconst sdk_runtime = globalThis?.c3_runtimeInterface?._localRuntime ?? globalThis.skymenExexJSOnDom._runtime;\n\nsaveDataGlobals.forEach(saveDataGlobal => {\n\tconst uid = saveDataGlobal.uid;\n\tconst sdkInst = sdk_runtime.GetInstanceByUID(uid);\n\tconst save = sdkInst.SaveToJson();\n\tsaveData[sdkInst._objectType._name] = save;\n})\n\nlocalVars.data = JSON.stringify({version: localVars.M_Save_Version, globals: saveData}, null, 2);"
+									"script": "const saveData = {}\nconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\nconst sdk_runtime = globalThis.c3_runtimeInterface && globalThis.c3_runtimeInterface._localRuntime? globalThis.c3_runtimeInterface._localRuntime : globalThis.skymenExexJSOnDomRuntimeSide._runtime;\n\nsaveDataGlobals.forEach(saveDataGlobal => {\n\tconst uid = saveDataGlobal.uid;\n\tconst sdkInst = sdk_runtime.GetInstanceByUID(uid);\n\tconst save = sdkInst.SaveToJson();\n\tsaveData[sdkInst._objectType._name] = save;\n})\n\nlocalVars.data = JSON.stringify({version: localVars.M_Save_Version, globals: saveData}, null, 2);"
 								},
 								{
 									"callFunction": "M_Save_ActuallyWriteData",
@@ -93,15 +93,19 @@
 							"sid": 935380475316654
 						},
 						{
+							"eventType": "comment",
+							"text": "this is a WIP feature to add support for Facebook, Snapchat and Gamepix save systems. Unusued currently"
+						},
+						{
 							"eventType": "block",
 							"conditions": [],
 							"actions": [
 								{
 									"type": "script",
-									"script": "localVars.useOwnSave = WebSdkWrapper.hasOwnSave()"
+									"script": "//localVars.useOwnSave = WebSdkWrapperBridge.hasOwnSave()"
 								}
 							],
-							"sid": 654587722198587
+							"sid": 139517609716105
 						},
 						{
 							"eventType": "block",
@@ -118,7 +122,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "WebSdkWrapper.currentSdk.implementation.save.set(\"save\", localVars.data);"
+									"script": "WebSdkWrapperBridge.currentSdk.implementation.save.set(\"save\", localVars.data);"
 								}
 							],
 							"sid": 511327630606475
@@ -182,7 +186,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "try {\n\tlet saveData = JSON.parse(localVars.data);\n\tconst version = saveData.version;\n\tif (version !== localVars.M_Save_Version) {\n\t\tsaveData = globalThis.handleVersionTransition(saveData);\n\t}\n\tconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\n\tconst sdk_runtime = globalThis?.c3_runtimeInterface?._localRuntime ?? globalThis.skymenExexJSOnDom._runtime;\n\t\n\tsaveDataGlobals.forEach(saveDataGlobal => {\n\t\tconst uid = saveDataGlobal.uid;\n\t\tconst sdkInst = sdk_runtime.GetInstanceByUID(uid);\n\t\tif (saveData.globals[sdkInst._objectType._name]) sdkInst.LoadFromJson(saveData.globals[sdkInst._objectType._name]);\n\t})\n} catch(e) {\n\tconsole.error(\"invalid save data\", localVars.data);\n}"
+									"script": "try {\n\tlet saveData = JSON.parse(localVars.data);\n\tconst version = saveData.version;\n\tif (version !== localVars.M_Save_Version) {\n\t\tsaveData = globalThis.handleVersionTransition(saveData);\n\t}\n\tconst saveDataGlobals = runtime.objects.SaveDataGlobals.getAllInstances();\n\tconst sdk_runtime = globalThis.c3_runtimeInterface && globalThis.c3_runtimeInterface._localRuntime? globalThis.c3_runtimeInterface._localRuntime : globalThis.skymenExexJSOnDomRuntimeSide._runtime;\n\t\n\tsaveDataGlobals.forEach(saveDataGlobal => {\n\t\tconst uid = saveDataGlobal.uid;\n\t\tconst sdkInst = sdk_runtime.GetInstanceByUID(uid);\n\t\tif (saveData.globals[sdkInst._objectType._name]) sdkInst.LoadFromJson(saveData.globals[sdkInst._objectType._name]);\n\t})\n} catch(e) {\n\tconsole.error(\"invalid save data\", localVars.data);\n}"
 								},
 								{
 									"id": "signal",
@@ -256,10 +260,10 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "//localVars.useOwnSave = globalThis.WebSdkWrapper.hasOwnSave()"
+									"script": "//localVars.useOwnSave = globalThis.WebSdkWrapperBridge.hasOwnSave()"
 								}
 							],
-							"sid": 680360792767921
+							"sid": 445371078808525
 						},
 						{
 							"eventType": "block",
@@ -267,7 +271,7 @@
 								{
 									"id": "compare-boolean-eventvar",
 									"objectClass": "System",
-									"sid": 737606551411165,
+									"sid": 637276763850507,
 									"parameters": {
 										"variable": "useOwnSave"
 									}
@@ -276,10 +280,10 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "let data = await WebSdkWrapper.currentSdk.implementation.save.get(\"save\");\nruntime.callFunction(\"M_Save_ActuallyLoadData\", data);"
+									"script": "let data = await WebSdkWrapperBridge.currentSdk.implementation.save.get(\"save\");\nruntime.callFunction(\"M_Save_ActuallyLoadData\", data);"
 								}
 							],
-							"sid": 916286698748992
+							"sid": 816406149453160
 						},
 						{
 							"eventType": "block",
